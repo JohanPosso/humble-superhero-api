@@ -2,18 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { CreateSuperheroDto } from './dto/create-superhero.dto';
 import { v4 as uuidv4 } from 'uuid';
 
-// Definimos un tipo extendido que incluye `id`
 export interface Superhero extends CreateSuperheroDto {
   id: string;
 }
 
-
 @Injectable()
 export class SuperheroesService {
-  private superheroes: Superhero[] = []; // Ahora `id` es obligatorio
+  private superheroes: Superhero[] = [];
 
   addSuperhero(superhero: CreateSuperheroDto) {
-    const newSuperhero: Superhero = { ...superhero, id: uuidv4() }; // Genera un UUID para `id`
+    const newSuperhero: Superhero = { ...superhero, id: uuidv4() };
     this.superheroes.push(newSuperhero);
     return newSuperhero;
   }

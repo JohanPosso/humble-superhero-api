@@ -1,4 +1,3 @@
-// src/superheroes/superheroes.controller.spec.ts
 import { Test, TestingModule } from '@nestjs/testing';
 import { SuperheroesController } from './superhero.controller';
 import { SuperheroesService } from './superhero.service';
@@ -20,13 +19,14 @@ describe('SuperheroController', () => {
 
   it('should add a new superhero', () => {
     const superhero: CreateSuperheroDto = {
-    
       name: 'Super Humble',
       superpower: 'Invisibility',
       humilityScore: 10,
     };
 
     controller.addSuperhero(superhero);
-    expect(service.getAllSuperheroes()).toEqual([superhero]);
+    expect(service.getAllSuperheroes()).toEqual(
+      expect.arrayContaining([expect.objectContaining(superhero)]),
+    );
   });
 });

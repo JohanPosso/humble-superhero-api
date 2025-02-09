@@ -28,6 +28,13 @@
 
 ## Project setup
 
+Clone the repository:
+
+```sh
+git clone https://github.com/JohanPosso/humble-superhero-api.git
+cd humble-superhero-api
+```
+
 ```bash
 $ npm install
 ```
@@ -58,43 +65,84 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Deployment
+# Humble Superhero API
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## Description
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+This is a simple API built with NestJS to manage a list of superheroes. Each superhero has a name, a superpower, and a humility score (from 1 to 10). The data is stored in an in-memory database.
 
-```bash
-$ npm install -g mau
-$ mau deploy
+## Endpoints
+
+### POST /superheroes
+
+Adds a new superhero.
+
+**Request Body:**
+
+```json
+{
+  "name": "Superman",
+  "superpower": "Flight",
+  "humilityScore": 8
+}
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+**Validations:**
 
-## Resources
+- Name and superpower are required.
+- The humility score must be a number between 1 and 10.
 
-Check out a few resources that may come in handy when working with NestJS:
+**Response:**
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```json
+{
+  "id": "46574efa-3a1b-487f-9226-a508707b7aba",
+  "name": "Superman",
+  "superpower": "Flight",
+  "humilityScore": 8
+}
+```
 
-## Support
+### GET /superheroes
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Retrieves the list of superheroes sorted by their humility score (from highest to lowest).
 
-## Stay in touch
+**Response:**
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```json
+[
+  {
+    "id": "46574efa-3a1b-487f-9226-a508707b7aba",
+    "name": "Superman",
+    "superpower": "Flight",
+    "humilityScore": 8
+  },
+  {
+    "id": "46574efa-3a1b-487f-9226-d706137h7tvf",
+    "name": "Batman",
+    "superpower": "Martial Arts",
+    "humilityScore": 7
+  }
+]
+```
 
-## License
+## Tests
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-# humble-superhero-api
+A Jest test is included to validate the creation of a superhero.
+
+## Collaboration
+
+To improve or expand this API with a teammate, I would suggest:
+
+1. Implementing a real database (such as PostgreSQL or MongoDB) instead of in-memory storage.
+2. Adding authentication with JWT to protect the API.
+3. Enhancing documentation with Swagger.
+4. Implementing pagination in the `GET /superheroes` endpoint.
+5. Conducting code reviews and pair programming sessions to improve code quality.
+
+## If I Had More Time
+
+If I had more time, I would explore:
+
+- Implementing WebSockets for real-time updates.
+- Integrating with an external API to fetch additional superhero information.
